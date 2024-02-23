@@ -36,3 +36,39 @@ def sum_candidates(candidates, target):
                     deep -= 0
 
     return all_ans
+
+
+def combinationSum2(candidates, target):
+    def backtrack(start, target, path):
+        print(start, target, path)
+        # Si el target es 0, hemos encontrado una combinación válida
+        if target == 0:
+            results.append(path[:])  # Añade una copia de 'path' a 'results'
+            return
+        # Si el target es negativo, esta ruta no nos lleva a una solución
+        if target < 0:
+            return
+
+        for i in range(start, len(candidates)):
+            # Si el candidato actual es igual al anterior, lo saltamos para evitar duplicados
+            if i > start and candidates[i] == candidates[i - 1]:
+                continue
+
+            # Añade el candidato actual a 'path' y realiza una llamada recursiva
+            path.append(candidates[i])
+            backtrack(i + 1, target - candidates[i], path)
+
+            # Deshace la última elección, permitiendo al backtracking probar la próxima opción
+            path.pop()
+
+    results = []
+    candidates.sort()  # Ordena los candidatos para facilitar la eliminación de duplicados
+    backtrack(0, target, [])
+    return results
+
+# Ejemplo de uso
+candidates = [10,1,2,7,6,1,5]
+target = 8
+print("Resultados:")
+combinationSum2(candidates, target)
+
