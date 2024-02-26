@@ -18,5 +18,10 @@ class TestLinkedList(unittest.TestCase):
         ll.swap_pairs()
         self.assertEqual(ll.to_list(), [2, 1, 4, 3, 5])
 
+    def test_empty_list(self):
+        ll = LinkedList()
+        ll.swap_pairs()
+        self.assertEqual(ll.to_list(), [])
+
 if __name__ == '__main__':
     unittest.main()
