@@ -61,7 +61,8 @@ class Test{folder_name}(unittest.TestCase):
     def test_{func_name}(self):
 
         ans = {func_name}()
-        self.assertEqual(ans, 3)
+        expected_ans = 3
+        self.assertEqual(ans, expected_ans)
 
 if __name__ == '__main__':
     unittest.main()
