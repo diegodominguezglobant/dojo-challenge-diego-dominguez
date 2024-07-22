@@ -34,8 +34,11 @@ os.mkdir(folder_name)
 with open(f"{folder_name}/README.md", 'w') as readme_file:
     readme_file.write(
         f"""# Testing
+### {" ".join([x.capitalize() for x in func_name.split("_")])}:
 
-### Run:
+### Description:
+[Add Description]
+### Run tests:
 ```sh
 python3 -m unittest {folder_year}/{month}/{folder_name}/test_challenge.py
 ```
@@ -84,4 +87,4 @@ dojo-challenge-diego-dominguez/
 """
 )
 
-print(f"Git url: https://github.com/U9-GLO297-CW/dojo-challenge-diego-dominguez/tree/main/Y2024/Mar/{folder_name}")
+print(f"Git url: https://github.com/U9-GLO297-CW/dojo-challenge-diego-dominguez/tree/main/{folder_year}/{month}/{folder_name}")
