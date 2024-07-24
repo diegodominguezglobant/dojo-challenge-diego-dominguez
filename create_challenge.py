@@ -23,6 +23,29 @@ if not month in os.listdir(folder_year):
     os.mkdir(f"{folder_year}/{month}")
     print(f"Folder '{folder_year}/{month}' created")
 
+# Creating tests file before changing directory
+with open(f"tests/test_{func_name}.py", "w") as pytesting_file:
+    pytesting_file.write(
+        f"""import unittest
+
+from {folder_year}.{month}.{folder_name}.challenge import {func_name}
+
+
+class Test{folder_name}(unittest.TestCase):
+    def test_{func_name}(self):
+        expected_ans = 3
+
+        ans = {func_name}()
+
+        self.assertEqual(ans, expected_ans)
+
+if __name__ == '__main__':
+    unittest.main()
+
+"""
+        )
+
+# Chaniging directory to create challenge file and README.md
 os.chdir(f"{folder_year}/{month}")
 
 if folder_name in os.listdir():
@@ -33,14 +56,14 @@ os.mkdir(folder_name)
 
 with open(f"{folder_name}/README.md", 'w') as readme_file:
     readme_file.write(
-        f"""# Testing
-### {" ".join([x.capitalize() for x in func_name.split("_")])}:
+        f"""# {" ".join([x.capitalize() for x in func_name.split("_")])}
 
 ### Description:
 [Add Description]
+# Testing
 ### Run tests:
 ```sh
-python3 -m unittest {folder_year}/{month}/{folder_name}/test_challenge.py
+python3 -m unittest discover -s tests
 ```
 
 """
@@ -53,25 +76,6 @@ with open(f"{folder_name}/challenge.py", "w") as python_file:
 """
         )
 
-with open(f"{folder_name}/test_challenge.py", "w") as pytesting_file:
-    pytesting_file.write(
-        f"""import unittest
-
-from {folder_year}.{month}.{folder_name}.challenge import {func_name}
-
-
-class Test{folder_name}(unittest.TestCase):
-    def test_{func_name}(self):
-
-        ans = {func_name}()
-        expected_ans = 3
-        self.assertEqual(ans, expected_ans)
-
-if __name__ == '__main__':
-    unittest.main()
-
-"""
-        )
 print("Done with no errors.")
 print(
     f"""
@@ -79,9 +83,9 @@ dojo-challenge-diego-dominguez/
 ├── {folder_year}/
 │   ├── {month}/
 │   │   ├── {folder_name}/
-│   │   │   ├── README.md
-│   │   │   ├── test_challenge.py
-│   │   │   └── challenge.py
+│   │   │    ├── README.md
+│   │   │    ├── challenge.py
+│   ├──tests/└── test_{func_name}.py
 ├── create_challenge.py
 └── README.md
 """
