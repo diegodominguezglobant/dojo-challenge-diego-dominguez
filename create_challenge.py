@@ -33,11 +33,11 @@ os.mkdir(folder_name)
 
 with open(f"{folder_name}/README.md", 'w') as readme_file:
     readme_file.write(
-        f"""# Testing
-### {" ".join([x.capitalize() for x in func_name.split("_")])}:
+        f"""# {" ".join([x.capitalize() for x in func_name.split("_")])}
 
 ### Description:
 [Add Description]
+# Testing
 ### Run tests:
 ```sh
 python3 -m unittest {folder_year}/{month}/{folder_name}/test_challenge.py
