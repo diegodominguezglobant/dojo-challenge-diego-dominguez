@@ -3,14 +3,27 @@ import os
 from datetime import datetime
 
 parser = argparse.ArgumentParser(description='Create a directory and file for a challenge.')
-parser.add_argument('-n', '--name', type=str, help='Challenge Name', required=True)
+parser.add_argument('-n', '--name', type=str, help='Challenge Name (separated with underscore (_))', required=True)
+parser.add_argument('-nd', '--not-dojo', action="store_false", help='Is challenge for dojo?')
 
 args = parser.parse_args()
 func_name = args.name
+dojo = args.not_dojo
 folder_name = "".join([x.capitalize() for x in func_name.split("_")])
 
 month, year = datetime.now().strftime("%b-%Y").split("-")
 print(f"Date: {month}-{year}")
+
+print(f"Creating challenge for dojo: {dojo}")
+if not dojo:
+    if not "NotDojo" in os.listdir():
+        os.mkdir("NotDojo")
+    os.chdir("NotDojo")
+
+if not "tests" in os.listdir():
+    print(f"There is no folder for tests, creating one...")
+    os.mkdir("tests")
+    print(f"Folder 'tests' created")
 
 folder_year = f"Y{year}"
 if not folder_year in os.listdir():
